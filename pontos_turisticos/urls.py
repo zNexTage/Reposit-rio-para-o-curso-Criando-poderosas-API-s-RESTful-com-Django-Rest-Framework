@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from django.urls.conf import include
 from django.conf import settings
 from django.conf.urls.static import static
@@ -24,9 +24,11 @@ from atracoes.api.viewset import AtracoesViewSet
 from enderecos.api.viewset import EnderecosViewSet
 from comentarios.api.viewset import ComentariosViewSet
 from avaliacoes.api.viewset import AvaliacoesViewSet
+from rest_framework.authtoken.views import obtain_auth_token
 
 router = routers.DefaultRouter()
-router.register(r'pontos_turisticos', PontoTuristicoViewSet, basename='PontoTuristico')
+router.register(r'pontos_turisticos', PontoTuristicoViewSet,
+                basename='PontoTuristico')
 router.register(r'atracoes', AtracoesViewSet)
 router.register(r'enderecos', EnderecosViewSet)
 router.register(r'comentarios', ComentariosViewSet)
@@ -35,4 +37,5 @@ router.register(r'avaliacoes', AvaliacoesViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # SOlução para servir arquivos em ambiemnte de desenvolvimento
+    path('api-token-auth/', obtain_auth_token),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # SOlução para servir arquivos em ambiemnte de desenvolvimento
