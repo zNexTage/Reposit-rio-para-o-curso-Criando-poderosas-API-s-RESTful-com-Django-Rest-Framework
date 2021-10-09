@@ -6,5 +6,5 @@ from rest_framework.serializers import ModelSerializer
 class AtracoesSerializer(ModelSerializer):
     class Meta:
         model = Atracoes
-        fields = ('id' ,'nome', 'descricao', 'horario_func', 'idade_minima', 'fotos')
+        fields = ('id' ,'nome', 'descricao', 'horario_func', 'idade_minima', 'fotos', 'observacoes')
     
