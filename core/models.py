@@ -6,6 +6,11 @@ from enderecos.models import Endereco
 
 # Create your models here.
 
+class DocIdentificacao(models.Model):
+    descricao = models.CharField(max_length=100)
+
+    def __str__(self) -> str:
+        return self.descricao
 
 class PontoTuristico(models.Model):
     nome = models.CharField(max_length=150)
@@ -18,6 +23,7 @@ class PontoTuristico(models.Model):
         Endereco, on_delete=models.CASCADE, null=True, blank=True)
     fotos = models.ImageField(
         upload_to='pontos_turisticos', null=True, blank=True)
+    doc_identificacao = models.OneToOneField(DocIdentificacao, on_delete=models.CASCADE, null=True, blank=True)
     
     #Pode ser usado no serializer
     @property
