@@ -10,8 +10,8 @@ from .serializers import PontoTuristicoSerializer
 
 
 class PontoTuristicoViewSet(ModelViewSet):
-    permission_classes=(IsAuthenticated,)
-    authentication_classes=(TokenAuthentication,)
+    # permission_classes=(IsAuthenticated,)
+    # authentication_classes=(TokenAuthentication,)
     # queryset=PontoTuristico.objects.all()
     serializer_class = PontoTuristicoSerializer
     # http_method_names=['DELETE', ] # Quais requisições http a nossa api aceita
