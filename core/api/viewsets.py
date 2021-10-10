@@ -17,7 +17,7 @@ class PontoTuristicoViewSet(ModelViewSet):
     # http_method_names=['DELETE', ] # Quais requisições http a nossa api aceita
     filter_backends = (SearchFilter,)
     search_fields = ('nome', 'descricao', 'endereco__linha1')
-    lookup_field = 'nome'  # Campo de busca. O padrão é o ID. Precisa ser um campo unico
+    lookup_field = 'id'  # Campo de busca. O padrão é o ID. Precisa ser um campo unico
 
     def get_queryset(self):
         id = self.request.query_params.get('id', None)
@@ -73,3 +73,19 @@ class PontoTuristicoViewSet(ModelViewSet):
             return Response({'message': 'Esse ponto turistico não existe'}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response({'message': 'O ponto de turistico {} foi denunciado com sucesso'.format(ponto.nome)})
+
+    @action(methods=['post'], detail=True)
+    def associa_atracoes(self, request, id):
+        atracoes = request.data['ids']
+
+        ponto = PontoTuristico.objects.filter(pk=id).first()
+
+        if not ponto:
+            return Response({'mensagem': 'Esse ponto turisitco não existe'}, status=status.HTTP_404_NOT_FOUND)
+
+        ponto.atracoes.set(atracoes)
+
+        ponto.save()
+
+        return Response(PontoTuristicoSerializer(ponto).data, status=status.HTTP_201_CREATED)
+            
