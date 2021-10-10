@@ -103,7 +103,7 @@ python3 -m venv ./venv/
 |        | csh/tcsh     | source venv/bin/activate.csh |
 |        | PowerShell Core   | venv/bin/Activate.ps1 |
 | Windows | cmd.exe   | C:\> venv\Scripts\activate.bat |
-|         | PowerShell   | C:\> <venv>\Scripts\Activate.ps1 |
+|         | PowerShell   | C:\> venv\Scripts\Activate.ps1 |
 
 Para mais informações acesse: https://docs.python.org/pt-br/3/library/venv.html
 
