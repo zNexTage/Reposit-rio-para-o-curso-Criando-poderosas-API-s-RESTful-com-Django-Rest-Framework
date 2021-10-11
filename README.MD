@@ -7,13 +7,53 @@
 # 1. Requisitos Necessários
 
 - Python 3.
+- Django
 
 # 2. Configurações Essenciais
 
-## 2.1. Criando o Arquivo .env
+
+
+## 2.1. Criando uma VirtualEnv (Ambientes Virtuais)
+-  Abra o terminal e acesse a pasta raíz do projeto;
+- Crie uma pasta chamada venv;
+```sh
+mkdir venv
+```
+- Essa pasta armazenará todos os arquivos para o funcionamento do VirtualEnv;
+- Execute o seguinte comando para gerar a VirtualEnv:
+```sh
+python3 -m venv ./venv/
+```
+> Nota: `python3 -m venv` é o comando em si e `./venv/` é a pasta que foi criada.
+
+*Referências: https://docs.python.org/pt-br/3/library/venv.html*
+
+## 2.2. Ativar a VirtualEnv 
+-  Abra o terminal e acesse a pasta raíz do projeto;
+- Os comandos para gerar a VirtualEnv variam de acordo com o sistema operacional;
+
+| Plataforma | Shell | Comando para ativar o ambiente virtual |
+| ------     | ------ | ------ |
+| POSIX  | bash/zsh | source venv/bin/activate |
+|        | fish     | source venv/bin/activate.fish |
+|        | csh/tcsh     | source venv/bin/activate.csh |
+|        | PowerShell Core   | venv/bin/Activate.ps1 |
+| Windows | cmd.exe   | C:\> venv\Scripts\activate.bat |
+|         | PowerShell   | C:\> venv\Scripts\Activate.ps1 |
+
+Para mais informações acesse: https://docs.python.org/pt-br/3/library/venv.html
+
+## 2.3. Instalando as dependências necessárias
+- Abra o terminal e acesse a pasta raíz do projeto;
+- Execute o comando:
+```sh
+pip install -r requirements.txt
+```
+
+## 2.4. Criando o Arquivo .env
 - Na raíz do projeto crie o arquivo .env.
 
-### 2.1.1. Preenchendo o Arquivo .env
+### 2.4.1. Preenchendo o Arquivo .env
 - O arquivo .env tem como conteúdo a chave secreta (SECRET_KEY) do django e a flag DEBUG.
 - Copie o código abaixo e cole no seu arquivo .env
 
@@ -22,7 +62,7 @@ SECRET_KEY=minha_chave_secreta
 DEBUG=True
 ```
 
-### 2.1.2. Gerando uma chave secreta (SECRET_KEY)
+### 2.4.2. Gerando uma chave secreta (SECRET_KEY)
 -  Abra o terminal e acesse a pasta raíz do projeto;
 
 #### Opção 1 - Gerar a chave secreta pelo shell do Python.
@@ -49,7 +89,10 @@ python3 -c 'from django.core.management.utils import get_random_secret_key; prin
 
 
 #### Opção 3 (Para Python 3.6+) - Gerar a chave secreta pelo shell do Python utilizando a biblioteca secrets.
-- Abra o shell do python. Digite no terminal: python3 manage.py shell
+- Abra o shell do python. Digite no terminal: 
+```sh
+python3 manage.py shell
+```
 - Cole o seguinte código:
 ```python
 import secrets
@@ -71,49 +114,6 @@ python3 -c "import secrets; print(secrets.token_urlsafe())"
 - Abra o arquivo .env;
 - Substitua o *minha_chave_secreta* pela chave gerada.
 
-
-
-
-
-
-
-
-## 2.2. Criando uma VirtualEnv (Ambientes Virtuais)
--  Abra o terminal e acesse a pasta raíz do projeto;
-- Crie uma pasta chamada venv;
-```sh
-mkdir venv
-```
-- Essa pasta guardara os arquivos da VirtualEnv;
-- Execute o seguinte comando para gerar a VirtualEnv:
-```sh
-python3 -m venv ./venv/
-```
-
-*Referências: https://docs.python.org/pt-br/3/library/venv.html*
-
-## 2.3. Ativar a VirtualEnv 
--  Abra o terminal e acesse a pasta raíz do projeto;
-- Os comandos variam de acordo com o sistema operacional;
-
-| Plataforma | Shell | Comando para ativar o ambiente virtual |
-| ------     | ------ | ------ |
-| POSIX  | bash/zsh | source venv/bin/activate |
-|        | fish     | source venv/bin/activate.fish |
-|        | csh/tcsh     | source venv/bin/activate.csh |
-|        | PowerShell Core   | venv/bin/Activate.ps1 |
-| Windows | cmd.exe   | C:\> venv\Scripts\activate.bat |
-|         | PowerShell   | C:\> venv\Scripts\Activate.ps1 |
-
-Para mais informações acesse: https://docs.python.org/pt-br/3/library/venv.html
-
-## 2.4. Instalando as dependências necessárias
-- Abra o terminal e acesse a pasta raíz do projeto;
-- Execute o comando:
-```sh
-pip install -r requirements.txt
-```
-
 ## 2.5. Rodando as migrations
 - Abra o terminal e pasta raíz do projeto;
 - Execute o seguinte comando:
@@ -130,7 +130,7 @@ python3 manage.py createsuperuser
 - Informe um username (nome de usuário);
 - Informe um email (opcional);
 - Informe uma senha;
-- O superuser será gerado e você utilizar as credenciais para acessar a área administrativa do django;
+- O superuser será gerado e você pode utilizar as credenciais para acessar a área administrativa do django;
 
 
 # 3. Subindo a aplicação
@@ -139,7 +139,7 @@ python3 manage.py createsuperuser
 ```sh
 python3 manage.py runserver
 ```
-- A aplicação rodará na port 8000;
+- A aplicação rodará na porta 8000;
 - http:/localhost:8000/
 
 # 3.1. Acessando a rota administrativa
